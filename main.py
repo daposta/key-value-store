@@ -1,6 +1,7 @@
-class Collection:
-    counter = 0
+from uuid import uuid4
 
+
+class Collection:
     def __init__(self, name):
         self.__name = name
         self.__records = []  # array of
@@ -10,8 +11,7 @@ class Collection:
         return self.__name
 
     def add(self, record: dict):
-        self.__records.append({self.counter: record})
-        self.counter += 1
+        self.__records.append({uuid4(): record})
 
     def update(self, key, value):
         for entry in self.__records:
