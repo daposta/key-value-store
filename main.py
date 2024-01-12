@@ -30,6 +30,9 @@ class KeyValueStore:
         self.collections = []
 
     def insert(self, collection: str, data: dict) -> None:
+        for coll in self.collections:
+            if coll.name == collection:
+                return
         c = Collection(collection)
         c.add(data)
         self.collections.append(c)
@@ -44,9 +47,13 @@ class KeyValueStore:
             if item.name == collection:
                 print(item.results)
 
+    def fetch_collections(self):
+        return [item.name for item in self.collections]
+
 
 db = KeyValueStore()
 db.insert("users", {"name": "Dapo", "state_of_origin": "Lagos", "gender": "Male"})
 db.insert("users", {"name": "Taiwo", "state_of_origin": "Ondo", "gender": "Female"})
 db.display("users")
+print(db.fetch_collections())
 # db.update("users", {"name": "Taiwo", "state_of_origin": "Ondo", "gender": "Female"})
